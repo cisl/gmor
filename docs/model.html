@@ -1,0 +1,817 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module model</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>model</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:///C:/workspace/projects/gmor/gmor/model.py">c:\workspace\projects\gmor\gmor\model.py</a></font></td></tr></table>
+    <p><tt>model.py<br>
+&nbsp;<br>
+__author__&nbsp;=&nbsp;"David&nbsp;Bristow,&nbsp;Alison&nbsp;Goshulak"<br>
+__copyright__&nbsp;=&nbsp;"Copyright&nbsp;2016"<br>
+__credits__&nbsp;=&nbsp;[]<br>
+__maintainer__&nbsp;=&nbsp;"David&nbsp;Bristow"<br>
+__status__&nbsp;=&nbsp;"Development"</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="copy.html">copy</a><br>
+<a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
+<a href="matplotlib.pylab.html">matplotlib.pylab</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="model.html#GMORModel">GMORModel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="model.html#GMORRunner">GMORRunner</a>
+</font></dt><dt><font face="helvetica, arial"><a href="model.html#GMORScenarioModel">GMORScenarioModel</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="model.html#ENTTYPE">ENTTYPE</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ENTTYPE">class <strong>ENTTYPE</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>ENTYPE:&nbsp;Permitted&nbsp;entity&nbsp;types<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>ANTECEDENT</strong> = 'antecedent'</dl>
+
+<dl><dt><strong>EVENT</strong> = 'event'</dl>
+
+<dl><dt><strong>FUNCTION</strong> = 'function'</dl>
+
+<dl><dt><strong>RESOURCE</strong> = 'resource'</dl>
+
+<dl><dt><strong>SYSTEM</strong> = 'system'</dl>
+
+<dl><dt><strong>TIME</strong> = 'time'</dl>
+
+<dl><dt><strong>TYPES</strong> = ('function', 'antecedent', 'resource', 'system', 'event', 'time')</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GMORModel">class <strong>GMORModel</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Builds&nbsp;and&nbsp;modifies&nbsp;a&nbsp;GMOR&nbsp;entity&nbsp;model.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+set_and_check,&nbsp;set_and_check_json,&nbsp;is_ent,&nbsp;are_ents,&nbsp;is_dep,&nbsp;valid_res_sts,<br>
+n_dep_of_ent,&nbsp;num_res_sts,&nbsp;num_ents,&nbsp;get_ents_with_internal_dep,&nbsp;valid_parent,<br>
+ents_ready,&nbsp;deps_ready,&nbsp;res_sts_ready,&nbsp;deads_ready,&nbsp;res_lm_ready,&nbsp;op_p_ready,&nbsp;ready,<br>
+add_entity,&nbsp;add_dep,&nbsp;set_res_sts,&nbsp;set_op_perf_levs,&nbsp;set_deads,&nbsp;set_res_lim,&nbsp;del_entity,<br>
+del_dep,&nbsp;edit_entity<br>
+&nbsp;<br>
+Instance&nbsp;variables:<br>
+entities,&nbsp;ent_types,&nbsp;parents,&nbsp;dependencies,&nbsp;resultant_states,<br>
+resource_limits,&nbsp;deadlines,&nbsp;op_performance_levels<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GMORModel-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;(and&nbsp;initially&nbsp;empty)&nbsp;model.</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-add_dep"><strong>add_dep</strong></a>(self, ent, dep_name)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;dependency&nbsp;relationship&nbsp;between&nbsp;two&nbsp;entities.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity&nbsp;with&nbsp;the&nbsp;new&nbsp;dependency&nbsp;on&nbsp;dep_name<br>
+dep_name&nbsp;--&nbsp;the&nbsp;entity&nbsp;that&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;ent's&nbsp;list&nbsp;of&nbsp;dependencies<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;dependency&nbsp;on&nbsp;dep_name&nbsp;added&nbsp;to&nbsp;ent&nbsp;<br>
+False&nbsp;--&nbsp;if&nbsp;the&nbsp;dependency&nbsp;already&nbsp;exists,&nbsp;if&nbsp;ent&nbsp;or&nbsp;dep_name&nbsp;are&nbsp;not&nbsp;entities,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;if&nbsp;they're&nbsp;both&nbsp;resources&nbsp;that&nbsp;are&nbsp;distinct&nbsp;from&nbsp;one&nbsp;another</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-add_entity"><strong>add_entity</strong></a>(self, name, ent_type, parent<font color="#909090">=''</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;entity&nbsp;to&nbsp;the&nbsp;model.<br>
+&nbsp;<br>
+Arguments:<br>
+name&nbsp;--&nbsp;string&nbsp;name&nbsp;of&nbsp;the&nbsp;new&nbsp;entity<br>
+ent_type&nbsp;--&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;new&nbsp;entity<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+parent&nbsp;--&nbsp;the&nbsp;parent&nbsp;name&nbsp;of&nbsp;the&nbsp;new&nbsp;entity&nbsp;(default&nbsp;'';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent&nbsp;will&nbsp;be&nbsp;set&nbsp;to&nbsp;same&nbsp;value&nbsp;as&nbsp;ent_type)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;entity&nbsp;added<br>
+False&nbsp;--&nbsp;if&nbsp;entity&nbsp;already&nbsp;exists,&nbsp;type&nbsp;is&nbsp;invalid,&nbsp;or&nbsp;parent&nbsp;is&nbsp;invalid</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-are_ents"><strong>are_ents</strong></a>(self, ents)</dt><dd><tt>Checks&nbsp;if&nbsp;all&nbsp;are&nbsp;entities&nbsp;of&nbsp;the&nbsp;model.<br>
+&nbsp;<br>
+Arguments:<br>
+ents&nbsp;--&nbsp;a&nbsp;list&nbsp;of&nbsp;names&nbsp;for&nbsp;potential&nbsp;entities<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;all&nbsp;values&nbsp;in&nbsp;ents&nbsp;exist&nbsp;in&nbsp;model<br>
+Fales&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-deads_ready"><strong>deads_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;deadlines&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;deadlines&nbsp;of&nbsp;each&nbsp;entity&nbsp;are&nbsp;valid&nbsp;(not&nbsp;empty&nbsp;and&nbsp;with&nbsp;no&nbsp;negative&nbsp;values)<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;deadlines&nbsp;are&nbsp;not&nbsp;valid</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-del_dep"><strong>del_dep</strong></a>(self, ent, dep)</dt><dd><tt>Delete&nbsp;dependency&nbsp;relationship&nbsp;between&nbsp;two&nbsp;entities.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity&nbsp;that&nbsp;used&nbsp;to&nbsp;depend&nbsp;on&nbsp;dep<br>
+dep_name&nbsp;--&nbsp;the&nbsp;entity&nbsp;that&nbsp;will&nbsp;be&nbsp;removed&nbsp;from&nbsp;ent's&nbsp;list&nbsp;of&nbsp;dependencies<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;dependency&nbsp;removed<br>
+False&nbsp;--&nbsp;if&nbsp;ent&nbsp;or&nbsp;dep&nbsp;is&nbsp;not&nbsp;an&nbsp;entity,&nbsp;or&nbsp;the&nbsp;dependency&nbsp;relationship&nbsp;doesn't&nbsp;exist</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-del_entity"><strong>del_entity</strong></a>(self, name)</dt><dd><tt>Delete&nbsp;entity&nbsp;and&nbsp;track&nbsp;affected&nbsp;entities.<br>
+&nbsp;<br>
+Arguments:<br>
+name&nbsp;--&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;entity<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+all&nbsp;the&nbsp;entities&nbsp;that&nbsp;used&nbsp;to&nbsp;depend&nbsp;on&nbsp;the&nbsp;deleted&nbsp;entity&nbsp;(list)<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;if&nbsp;ent&nbsp;does&nbsp;not&nbsp;exist&nbsp;in&nbsp;model</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-deps_ready"><strong>deps_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;dependencies&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;dependencies&nbsp;of&nbsp;each&nbsp;entity&nbsp;are&nbsp;valid&nbsp;(every&nbsp;entity&nbsp;has&nbsp;at&nbsp;least&nbsp;one&nbsp;dependency,&nbsp;at&nbsp;least<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;one&nbsp;entity&nbsp;has&nbsp;an&nbsp;internal&nbsp;dependency,&nbsp;and&nbsp;resources&nbsp;do&nbsp;not&nbsp;depend&nbsp;on&nbsp;other&nbsp;resources)<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;dependencies&nbsp;are&nbsp;not&nbsp;valid</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-edit_entity"><strong>edit_entity</strong></a>(self, ent, new_ent_type, new_ent_parent)</dt><dd><tt>Change&nbsp;the&nbsp;parent&nbsp;or&nbsp;the&nbsp;type&nbsp;(or&nbsp;both)&nbsp;of&nbsp;an&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity<br>
+new_ent_type&nbsp;--&nbsp;the&nbsp;new&nbsp;type&nbsp;of&nbsp;ent<br>
+new_ent_parent&nbsp;--&nbsp;the&nbsp;new&nbsp;parent&nbsp;of&nbsp;ent<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;parent&nbsp;or&nbsp;the&nbsp;type&nbsp;of&nbsp;ent&nbsp;changed<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-ents_ready"><strong>ents_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;entities&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;entities&nbsp;are&nbsp;valid&nbsp;(at&nbsp;least&nbsp;one&nbsp;exists&nbsp;in&nbsp;model,&nbsp;the&nbsp;names&nbsp;are&nbsp;legal,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;at&nbsp;least&nbsp;one&nbsp;is&nbsp;a&nbsp;function)<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;entities&nbsp;are&nbsp;not&nbsp;valid</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-formatted_json_text"><strong>formatted_json_text</strong></a>(self)</dt><dd><tt>Useful&nbsp;for&nbsp;saving&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;models&nbsp;as&nbsp;json&nbsp;strings&nbsp;that&nbsp;are&nbsp;human&nbsp;readable.<br>
+Creates&nbsp;a&nbsp;string&nbsp;that&nbsp;prints&nbsp;nicely&nbsp;in&nbsp;json&nbsp;format&nbsp;(but&nbsp;is&nbsp;not&nbsp;a&nbsp;json&nbsp;loaded&nbsp;<a href="__builtin__.html#object">object</a>).</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-get_ents_with_internal_dep"><strong>get_ents_with_internal_dep</strong></a>(self)</dt><dd><tt>Find&nbsp;entities&nbsp;with&nbsp;an&nbsp;internal&nbsp;dependency&nbsp;(that&nbsp;depend&nbsp;on&nbsp;an&nbsp;internal&nbsp;state).<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+the&nbsp;entities&nbsp;with&nbsp;an&nbsp;internal&nbsp;dependency&nbsp;(list)</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-is_dep"><strong>is_dep</strong></a>(self, ent, dep)</dt><dd><tt>Check&nbsp;if&nbsp;one&nbsp;entity&nbsp;is&nbsp;a&nbsp;dependency&nbsp;of&nbsp;another.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;an&nbsp;entity&nbsp;with&nbsp;a&nbsp;possible&nbsp;dependency&nbsp;on&nbsp;dep<br>
+dep&nbsp;--&nbsp;a&nbsp;possible&nbsp;dependency&nbsp;of&nbsp;ent<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;dep&nbsp;is&nbsp;a&nbsp;dependency&nbsp;of&nbsp;ent<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-is_ent"><strong>is_ent</strong></a>(self, ent)</dt><dd><tt>Check&nbsp;if&nbsp;it&nbsp;is&nbsp;an&nbsp;entity&nbsp;of&nbsp;the&nbsp;model.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;string&nbsp;name&nbsp;of&nbsp;the&nbsp;potential&nbsp;entity<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;ent&nbsp;is&nbsp;an&nbsp;entity<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-merge_models"><strong>merge_models</strong></a>(self, new_model, weight<font color="#909090">=0.5</font>)</dt><dd><tt>Add&nbsp;entities&nbsp;of&nbsp;another&nbsp;model&nbsp;to&nbsp;this&nbsp;model.<br>
+(Assumption:&nbsp;no&nbsp;shared&nbsp;entities&nbsp;between&nbsp;two&nbsp;models)<br>
+&nbsp;<br>
+Arguments:<br>
+new_model&nbsp;--&nbsp;the&nbsp;other&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;being&nbsp;merged&nbsp;into&nbsp;this&nbsp;model<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+weight&nbsp;--&nbsp;used&nbsp;to&nbsp;adjust&nbsp;performance&nbsp;levels&nbsp;to&nbsp;sum&nbsp;to&nbsp;1&nbsp;after&nbsp;merge&nbsp;(default&nbsp;0.5)<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;new_model&nbsp;is&nbsp;not&nbsp;ready</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-n_dep_of_ent"><strong>n_dep_of_ent</strong></a>(self, ent)</dt><dd><tt>Calculate&nbsp;number&nbsp;of&nbsp;dependencies&nbsp;of&nbsp;an&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+the&nbsp;number&nbsp;of&nbsp;dependencies&nbsp;of&nbsp;ent&nbsp;(int)<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;if&nbsp;ent&nbsp;not&nbsp;in&nbsp;model</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-num_ents"><strong>num_ents</strong></a>(self)</dt><dd><tt>Calculate&nbsp;the&nbsp;number&nbsp;of&nbsp;entities&nbsp;in&nbsp;the&nbsp;model.<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+the&nbsp;number&nbsp;of&nbsp;entities&nbsp;(int)</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-num_res_sts"><strong>num_res_sts</strong></a>(self, ent)</dt><dd><tt>Calculate&nbsp;number&nbsp;of&nbsp;resultant&nbsp;states&nbsp;of&nbsp;an&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+the&nbsp;number&nbsp;of&nbsp;entity&nbsp;resultant&nbsp;states&nbsp;for&nbsp;ent&nbsp;(int)<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;if&nbsp;ent&nbsp;not&nbsp;in&nbsp;model</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-op_p_ready"><strong>op_p_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;performance&nbsp;levels&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;performance&nbsp;levels&nbsp;are&nbsp;valid&nbsp;(only&nbsp;for&nbsp;function&nbsp;entities<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;sum&nbsp;of&nbsp;values&nbsp;is&nbsp;between&nbsp;0.9999999999&nbsp;and&nbsp;0.0000000001)<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-ready"><strong>ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;model&nbsp;is&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;minimum&nbsp;entry&nbsp;requirements&nbsp;complete&nbsp;(entities,&nbsp;dependencies,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultant&nbsp;states,&nbsp;performance&nbsp;levels,&nbsp;deadlines,&nbsp;and&nbsp;resource&nbsp;limits&nbsp;all&nbsp;ready)<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-res_lm_ready"><strong>res_lm_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;resource&nbsp;limits&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;resource&nbsp;limits&nbsp;are&nbsp;valid&nbsp;(non-negative&nbsp;and&nbsp;only&nbsp;for&nbsp;resource&nbsp;entities)<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-res_sts_ready"><strong>res_sts_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;resultant&nbsp;states&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;resultant&nbsp;states&nbsp;of&nbsp;each&nbsp;entity&nbsp;are&nbsp;valid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(a&nbsp;numpy&nbsp;array&nbsp;of&nbsp;the&nbsp;right&nbsp;length&nbsp;with&nbsp;values&nbsp;equal&nbsp;to&nbsp;0&nbsp;or&nbsp;1)<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-set_and_check"><strong>set_and_check</strong></a>(self, entities, ent_types, parents, dependencies, resultant_states, resource_limits, deadlines, op_performance_levels)</dt><dd><tt>Set&nbsp;model&nbsp;with&nbsp;given&nbsp;values&nbsp;and&nbsp;check&nbsp;that&nbsp;it's&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Arguments:<br>
+entities&nbsp;--&nbsp;the&nbsp;entities&nbsp;that&nbsp;will&nbsp;populate&nbsp;the&nbsp;model<br>
+ent_types&nbsp;--&nbsp;the&nbsp;type&nbsp;of&nbsp;each&nbsp;entity&nbsp;in&nbsp;the&nbsp;model<br>
+parents&nbsp;--&nbsp;the&nbsp;parent&nbsp;of&nbsp;each&nbsp;entity&nbsp;(can&nbsp;be&nbsp;another&nbsp;entity,&nbsp;a&nbsp;type,&nbsp;or&nbsp;blank)<br>
+dependencies&nbsp;--&nbsp;for&nbsp;each&nbsp;entity,&nbsp;the&nbsp;list&nbsp;of&nbsp;entities&nbsp;it&nbsp;depends&nbsp;on<br>
+resultant_states&nbsp;--&nbsp;for&nbsp;each&nbsp;entity,&nbsp;a&nbsp;list&nbsp;of&nbsp;states&nbsp;resulting&nbsp;from&nbsp;the&nbsp;state&nbsp;of&nbsp;it's&nbsp;dependencies<br>
+resource_limits&nbsp;--&nbsp;the&nbsp;total&nbsp;amount&nbsp;available&nbsp;of&nbsp;each&nbsp;resource&nbsp;entity<br>
+deadlines&nbsp;--&nbsp;for&nbsp;function&nbsp;entities,&nbsp;the&nbsp;time&nbsp;that&nbsp;the&nbsp;entity&nbsp;must&nbsp;be&nbsp;active&nbsp;by<br>
+op_performance_levels&nbsp;--&nbsp;the&nbsp;performance&nbsp;level&nbsp;of&nbsp;each&nbsp;function&nbsp;entity&nbsp;when&nbsp;active<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;model&nbsp;is&nbsp;ready&nbsp;for&nbsp;analysis<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-set_and_check_json"><strong>set_and_check_json</strong></a>(self, json_text)</dt><dd><tt>Set&nbsp;model&nbsp;with&nbsp;given&nbsp;values&nbsp;from&nbsp;JSON&nbsp;text&nbsp;and&nbsp;check&nbsp;that&nbsp;it's&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Arguments:<br>
+json_text&nbsp;--&nbsp;the&nbsp;JSON&nbsp;text&nbsp;containing&nbsp;values&nbsp;for&nbsp;the&nbsp;model&nbsp;variables<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;model&nbsp;is&nbsp;ready&nbsp;for&nbsp;analysis<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;JSON&nbsp;text&nbsp;is&nbsp;not&nbsp;in&nbsp;the&nbsp;proper&nbsp;form</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-set_deads"><strong>set_deads</strong></a>(self, deadlines, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;deadlines.<br>
+&nbsp;<br>
+Arguments:<br>
+deadlines&nbsp;--&nbsp;the&nbsp;new&nbsp;deadlines<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;deadlines&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;if&nbsp;keys&nbsp;of&nbsp;deadlines&nbsp;are&nbsp;not&nbsp;entities&nbsp;or&nbsp;values&nbsp;are&nbsp;not&nbsp;all&nbsp;non-negative<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;new&nbsp;deadlines&nbsp;are&nbsp;invalid</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-set_op_perf_levs"><strong>set_op_perf_levs</strong></a>(self, op_perf_levs, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;performance&nbsp;levels.<br>
+&nbsp;<br>
+Arguments:<br>
+op_perf_levs&nbsp;--&nbsp;the&nbsp;new&nbsp;levels<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;op_perf_levs&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;if&nbsp;some&nbsp;keys&nbsp;of&nbsp;op_perf_levs&nbsp;are&nbsp;not&nbsp;functions,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;the&nbsp;sum&nbsp;of&nbsp;values&nbsp;is&nbsp;not&nbsp;between&nbsp;0.9999999999&nbsp;and&nbsp;0.0000000001</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-set_res_lim"><strong>set_res_lim</strong></a>(self, res_lim, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;resource&nbsp;limits.<br>
+&nbsp;<br>
+Arguments:<br>
+res_lim&nbsp;--&nbsp;the&nbsp;new&nbsp;resource&nbsp;limits<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;res_lim&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;if&nbsp;some&nbsp;keys&nbsp;of&nbsp;res_lim&nbsp;are&nbsp;not&nbsp;resources,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;values&nbsp;are&nbsp;not&nbsp;all&nbsp;non-negative</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-set_res_sts"><strong>set_res_sts</strong></a>(self, ent, states, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;resultant&nbsp;states&nbsp;for&nbsp;an&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity<br>
+states&nbsp;--&nbsp;the&nbsp;new&nbsp;resultant&nbsp;states&nbsp;for&nbsp;ent<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;states&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;if&nbsp;ent&nbsp;does&nbsp;not&nbsp;exist,&nbsp;states&nbsp;length&nbsp;is&nbsp;not&nbsp;2**len(dep&nbsp;of&nbsp;ent)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;values&nbsp;of&nbsp;states&nbsp;are&nbsp;not&nbsp;all&nbsp;0&nbsp;or&nbsp;1</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-valid_parent"><strong>valid_parent</strong></a>(self, ent, parent)</dt><dd><tt>Check&nbsp;if&nbsp;it&nbsp;is&nbsp;a&nbsp;valid&nbsp;parent&nbsp;for&nbsp;the&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity<br>
+parent&nbsp;--&nbsp;the&nbsp;parent&nbsp;name&nbsp;being&nbsp;checked<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;parent&nbsp;is&nbsp;an&nbsp;eligible&nbsp;parent&nbsp;name&nbsp;(either&nbsp;another&nbsp;entity,&nbsp;a&nbsp;type,&nbsp;or&nbsp;blank)<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;if&nbsp;ent&nbsp;not&nbsp;in&nbsp;model&nbsp;or&nbsp;ent&nbsp;and&nbsp;parent&nbsp;are&nbsp;the&nbsp;same</tt></dd></dl>
+
+<dl><dt><a name="GMORModel-valid_res_sts"><strong>valid_res_sts</strong></a>(self, ent, state, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;if&nbsp;they&nbsp;are&nbsp;valid&nbsp;resultant&nbsp;states&nbsp;for&nbsp;the&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity<br>
+state&nbsp;--&nbsp;the&nbsp;list&nbsp;of&nbsp;resultant&nbsp;states&nbsp;being&nbsp;checked<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;state&nbsp;is&nbsp;a&nbsp;valid&nbsp;list&nbsp;of&nbsp;resultant&nbsp;states&nbsp;for&nbsp;ent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(a&nbsp;numpy&nbsp;array&nbsp;of&nbsp;the&nbsp;right&nbsp;length&nbsp;with&nbsp;values&nbsp;equal&nbsp;to&nbsp;0&nbsp;or&nbsp;1)<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;the&nbsp;resultant&nbsp;states&nbsp;are&nbsp;invalid</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GMORRunner">class <strong>GMORRunner</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;Calculate&nbsp;and&nbsp;demonstrate&nbsp;implications&nbsp;of&nbsp;initial&nbsp;conditions&nbsp;set&nbsp;by&nbsp;scenario&nbsp;model.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+do_progression,&nbsp;plot_performance_curve,&nbsp;check_changes_timing&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+Instance&nbsp;variables:<br>
+entities,&nbsp;ent_types,&nbsp;dependencies,&nbsp;resultant_states,&nbsp;resource_limits,&nbsp;deadlines,<br>
+op_performance_levels,&nbsp;entity_lookup,&nbsp;dependencies_lookup<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GMORRunner-__init__"><strong>__init__</strong></a>(self, model)</dt><dd><tt>Constructs&nbsp;a&nbsp;runner&nbsp;for&nbsp;a&nbsp;given&nbsp;<a href="#GMORModel">GMORModel</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+model&nbsp;--&nbsp;the&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;the&nbsp;runner&nbsp;is&nbsp;based&nbsp;on<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;model&nbsp;is&nbsp;not&nbsp;ready&nbsp;for&nbsp;analysis</tt></dd></dl>
+
+<dl><dt><a name="GMORRunner-check_changes_timing"><strong>check_changes_timing</strong></a>(self, p_a, ents_for_pa, dep_changes, dep_timing)</dt><dd><tt>Check&nbsp;that&nbsp;deadlines&nbsp;of&nbsp;entities&nbsp;have&nbsp;been&nbsp;met.<br>
+&nbsp;<br>
+Arguments:<br>
+p_a&nbsp;--&nbsp;performance&nbsp;a,&nbsp;the&nbsp;system&nbsp;level&nbsp;performance<br>
+ents_for_pa&nbsp;--&nbsp;entities&nbsp;contributing&nbsp;to&nbsp;p_a<br>
+dep_changes&nbsp;--&nbsp;entity&nbsp;state&nbsp;changes<br>
+dep_timing&nbsp;--&nbsp;times&nbsp;when&nbsp;changes&nbsp;occur<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;all&nbsp;deadlines&nbsp;have&nbsp;been&nbsp;met<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORRunner-deterministic_progression"><strong>deterministic_progression</strong></a>(self, model, current_internal_states, realized_timelines, realized_exits, efforts)</dt><dd><tt>Do&nbsp;progression&nbsp;with&nbsp;given&nbsp;initial&nbsp;scenario&nbsp;conditions.<br>
+&nbsp;<br>
+Arguments:<br>
+model&nbsp;--&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;the&nbsp;scenario&nbsp;is&nbsp;based&nbsp;on<br>
+current_internal_states&nbsp;--&nbsp;state&nbsp;of&nbsp;internally&nbsp;dependent&nbsp;entities<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0&nbsp;for&nbsp;unavailable,&nbsp;1&nbsp;for&nbsp;available)<br>
+realized_timelines&nbsp;--&nbsp;time&nbsp;it&nbsp;takes&nbsp;for&nbsp;an&nbsp;entity's&nbsp;state&nbsp;to&nbsp;change&nbsp;once&nbsp;it's&nbsp;dependencies&nbsp;are&nbsp;met<br>
+realized_exits&nbsp;--&nbsp;amount&nbsp;of&nbsp;time&nbsp;an&nbsp;internal&nbsp;dependency&nbsp;of&nbsp;an&nbsp;entity&nbsp;is&nbsp;available<br>
+efforts&nbsp;--&nbsp;number&nbsp;of&nbsp;units&nbsp;of&nbsp;a&nbsp;resource&nbsp;dependency&nbsp;an&nbsp;entity&nbsp;requires<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+p_a&nbsp;--&nbsp;performance&nbsp;a,&nbsp;the&nbsp;system&nbsp;level&nbsp;performance&nbsp;(float)<br>
+dep_change&nbsp;--&nbsp;entity&nbsp;state&nbsp;changes&nbsp;(list)<br>
+dep_timing&nbsp;--&nbsp;times&nbsp;when&nbsp;changes&nbsp;occur&nbsp;(list)<br>
+tracked_resource_use&nbsp;--&nbsp;amounts&nbsp;of&nbsp;resource&nbsp;usage&nbsp;by&nbsp;changed&nbsp;entities&nbsp;(dict)</tt></dd></dl>
+
+<dl><dt><a name="GMORRunner-do_progression"><strong>do_progression</strong></a>(self, scenario)</dt><dd><tt>Progress&nbsp;the&nbsp;system&nbsp;based&nbsp;on&nbsp;scenario&nbsp;conditions.<br>
+&nbsp;<br>
+Arguments:<br>
+scenario&nbsp;--&nbsp;<a href="#GMORScenarioModel">GMORScenarioModel</a>&nbsp;progression&nbsp;will&nbsp;be&nbsp;based&nbsp;on<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;<a href="#GMORScenarioModel">GMORScenarioModel</a>&nbsp;is&nbsp;not&nbsp;ready&nbsp;for&nbsp;analysis<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;when&nbsp;there&nbsp;isn't&nbsp;enough&nbsp;time&nbsp;to&nbsp;meet&nbsp;a&nbsp;deadline<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+p_a&nbsp;--&nbsp;performance&nbsp;a,&nbsp;the&nbsp;system&nbsp;level&nbsp;performance&nbsp;(float)<br>
+dep_changes&nbsp;--&nbsp;entity&nbsp;state&nbsp;changes&nbsp;(list)<br>
+dep_timing&nbsp;--&nbsp;times&nbsp;when&nbsp;changes&nbsp;occur&nbsp;(list)<br>
+tracked_resource_use&nbsp;--&nbsp;amounts&nbsp;of&nbsp;resource&nbsp;usage&nbsp;by&nbsp;changed&nbsp;entities&nbsp;(dict)</tt></dd></dl>
+
+<dl><dt><a name="GMORRunner-plot_performance_curve"><strong>plot_performance_curve</strong></a>(self, p_a, dep_changes, dep_timing, save<font color="#909090">=False</font>, file_name<font color="#909090">=''</font>, path<font color="#909090">=''</font>)</dt><dd><tt>Plot&nbsp;the&nbsp;performance&nbsp;curve&nbsp;from&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;scenario.<br>
+&nbsp;<br>
+Arguments:<br>
+p_a&nbsp;--&nbsp;performance&nbsp;a,&nbsp;the&nbsp;system&nbsp;level&nbsp;performance<br>
+dep_changes&nbsp;--&nbsp;entity&nbsp;state&nbsp;changes<br>
+dep_timing&nbsp;--&nbsp;times&nbsp;when&nbsp;changes&nbsp;occur<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+save&nbsp;--&nbsp;should&nbsp;the&nbsp;figure&nbsp;be&nbsp;saved&nbsp;to&nbsp;a&nbsp;file?&nbsp;(default&nbsp;False)<br>
+file_name&nbsp;--&nbsp;name&nbsp;of&nbsp;the&nbsp;file&nbsp;the&nbsp;figure&nbsp;will&nbsp;be&nbsp;saved&nbsp;to&nbsp;(default&nbsp;'';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;will&nbsp;start&nbsp;with&nbsp;'LOSS'&nbsp;followed&nbsp;by&nbsp;current&nbsp;date&nbsp;and&nbsp;time)<br>
+path&nbsp;--&nbsp;absolute&nbsp;path&nbsp;to&nbsp;directory&nbsp;where&nbsp;file&nbsp;will&nbsp;be&nbsp;located&nbsp;(default&nbsp;'';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;will&nbsp;be&nbsp;to&nbsp;current&nbsp;working&nbsp;directory)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GMORScenarioModel">class <strong>GMORScenarioModel</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Builds&nbsp;and&nbsp;modifies&nbsp;a&nbsp;scenario&nbsp;model&nbsp;based&nbsp;on&nbsp;the&nbsp;properties&nbsp;of&nbsp;a&nbsp;<a href="#GMORModel">GMORModel</a>.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+reset,&nbsp;set_and_check,&nbsp;set,&nbsp;valid_states,&nbsp;valid_internal_states,<br>
+valid_realized_timelines,&nbsp;valid_efforts,&nbsp;cur_int_st_ready,&nbsp;rlzd_time_ready,<br>
+rlzd_ex_ready,&nbsp;eff_ready,&nbsp;ready,&nbsp;set_current_internal_states,&nbsp;set_realized_timelines,<br>
+set_realized_exit_by_ent,&nbsp;set_realized_exits,&nbsp;set_effort_by_resource,&nbsp;set_new_scen_model<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Instance&nbsp;variables:<br>
+model,&nbsp;name,&nbsp;current_internal_states,&nbsp;realized_timelines,&nbsp;realized_exits,&nbsp;efforts<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GMORScenarioModel-__init__"><strong>__init__</strong></a>(self, model, name)</dt><dd><tt>Constructs&nbsp;a&nbsp;scenario&nbsp;model.<br>
+&nbsp;<br>
+Arguments:<br>
+model&nbsp;--&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;the&nbsp;scenario&nbsp;will&nbsp;be&nbsp;based&nbsp;on<br>
+name&nbsp;--&nbsp;identifier&nbsp;of&nbsp;scenario&nbsp;model<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;is&nbsp;not&nbsp;ready&nbsp;for&nbsp;analysis</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-cur_int_st_ready"><strong>cur_int_st_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;that&nbsp;the&nbsp;current&nbsp;internal&nbsp;states&nbsp;are&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;states&nbsp;are&nbsp;ready<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-eff_ready"><strong>eff_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;that&nbsp;the&nbsp;efforts&nbsp;are&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;efforts&nbsp;are&nbsp;ready<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-ready"><strong>ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;that&nbsp;the&nbsp;scenario&nbsp;model&nbsp;is&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;scenario&nbsp;model&nbsp;is&nbsp;ready<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-reset"><strong>reset</strong></a>(self, model)</dt><dd><tt>Reset&nbsp;scenario&nbsp;conditions.<br>
+&nbsp;<br>
+Arguments:<br>
+model&nbsp;--&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;the&nbsp;scenario&nbsp;is&nbsp;based&nbsp;on</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-rlzd_ex_ready"><strong>rlzd_ex_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;that&nbsp;the&nbsp;realized&nbsp;exits&nbsp;are&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;exits&nbsp;are&nbsp;ready<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-rlzd_time_ready"><strong>rlzd_time_ready</strong></a>(self, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;that&nbsp;the&nbsp;realized&nbsp;time&nbsp;lines&nbsp;are&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;time&nbsp;lines&nbsp;are&nbsp;ready<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set"><strong>set</strong></a>(self, model, current_internal_states, realized_timelines, realized_exits, efforts)</dt><dd><tt>Set&nbsp;up&nbsp;scenario&nbsp;model&nbsp;with&nbsp;given&nbsp;conditions.<br>
+&nbsp;<br>
+Arguments:<br>
+model&nbsp;--&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;the&nbsp;scenario&nbsp;is&nbsp;based&nbsp;on<br>
+current_internal_states&nbsp;--&nbsp;state&nbsp;of&nbsp;internally&nbsp;dependent&nbsp;entities<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0&nbsp;for&nbsp;unavailable,&nbsp;1&nbsp;for&nbsp;available)<br>
+realized_timelines&nbsp;--&nbsp;time&nbsp;it&nbsp;takes&nbsp;for&nbsp;an&nbsp;entity's&nbsp;state&nbsp;to&nbsp;change&nbsp;once&nbsp;it's&nbsp;dependencies&nbsp;are&nbsp;met<br>
+realized_exits&nbsp;--&nbsp;amount&nbsp;of&nbsp;time&nbsp;an&nbsp;internal&nbsp;dependency&nbsp;of&nbsp;an&nbsp;entity&nbsp;is&nbsp;available<br>
+efforts&nbsp;--&nbsp;number&nbsp;of&nbsp;units&nbsp;of&nbsp;a&nbsp;resource&nbsp;dependency&nbsp;an&nbsp;entity&nbsp;requires<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;is&nbsp;not&nbsp;ready&nbsp;for&nbsp;analysis</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set_and_check"><strong>set_and_check</strong></a>(self, model, current_internal_states, realized_timelines, realized_exits, efforts)</dt><dd><tt>Set&nbsp;up&nbsp;scenario&nbsp;model&nbsp;and&nbsp;check&nbsp;if&nbsp;it's&nbsp;ready&nbsp;for&nbsp;analysis.<br>
+&nbsp;<br>
+Arguments:<br>
+model&nbsp;--&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;the&nbsp;scenario&nbsp;is&nbsp;based&nbsp;on<br>
+current_internal_states&nbsp;--&nbsp;state&nbsp;of&nbsp;internally&nbsp;dependent&nbsp;entities<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0&nbsp;for&nbsp;unavailable,&nbsp;1&nbsp;for&nbsp;available)<br>
+realized_timelines&nbsp;--&nbsp;time&nbsp;it&nbsp;takes&nbsp;for&nbsp;an&nbsp;entity's&nbsp;state&nbsp;to&nbsp;change&nbsp;once&nbsp;it's&nbsp;dependencies&nbsp;are&nbsp;met<br>
+realized_exits&nbsp;--&nbsp;amount&nbsp;of&nbsp;time&nbsp;an&nbsp;internal&nbsp;dependency&nbsp;of&nbsp;an&nbsp;entity&nbsp;is&nbsp;available<br>
+efforts&nbsp;--&nbsp;number&nbsp;of&nbsp;units&nbsp;of&nbsp;a&nbsp;resource&nbsp;dependency&nbsp;an&nbsp;entity&nbsp;requires<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;scenario&nbsp;model&nbsp;is&nbsp;ready&nbsp;for&nbsp;analysis<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set_current_internal_states"><strong>set_current_internal_states</strong></a>(self, curr_int_sts, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;internal&nbsp;states.<br>
+&nbsp;<br>
+Arguments:<br>
+curr_int_sts&nbsp;--&nbsp;the&nbsp;new&nbsp;states&nbsp;of&nbsp;entities&nbsp;with&nbsp;internal&nbsp;dependence<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;new&nbsp;states&nbsp;are&nbsp;valid&nbsp;and&nbsp;have&nbsp;been&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set_effort_by_resource"><strong>set_effort_by_resource</strong></a>(self, efforts, resource, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;efforts&nbsp;corresponding&nbsp;to&nbsp;a&nbsp;resource&nbsp;for&nbsp;entities&nbsp;dependent&nbsp;on&nbsp;the&nbsp;resource.<br>
+&nbsp;<br>
+Arguments:<br>
+efforts&nbsp;--&nbsp;the&nbsp;new&nbsp;efforts&nbsp;corresponding&nbsp;to&nbsp;resource<br>
+resource&nbsp;--&nbsp;the&nbsp;shared&nbsp;resource&nbsp;dependency&nbsp;of&nbsp;the&nbsp;affected&nbsp;entities<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;new&nbsp;efforts&nbsp;are&nbsp;valid&nbsp;(resource&nbsp;is&nbsp;a&nbsp;dependency&nbsp;of&nbsp;each&nbsp;entity&nbsp;in&nbsp;efforts,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;each&nbsp;new&nbsp;effort&nbsp;is&nbsp;non-negative,&nbsp;and&nbsp;none&nbsp;of&nbsp;the&nbsp;entities&nbsp;in&nbsp;efforts<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;the&nbsp;same&nbsp;entity&nbsp;as&nbsp;resource)&nbsp;and&nbsp;have&nbsp;been&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;new&nbsp;efforts&nbsp;cannot&nbsp;be&nbsp;set</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set_new_scen_model"><strong>set_new_scen_model</strong></a>(self, model)</dt><dd><tt>Set&nbsp;new&nbsp;scenario&nbsp;model&nbsp;with&nbsp;a&nbsp;different&nbsp;<a href="#GMORModel">GMORModel</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+model&nbsp;--&nbsp;new&nbsp;<a href="#GMORModel">GMORModel</a>,&nbsp;possibly&nbsp;with&nbsp;some&nbsp;same&nbsp;entities&nbsp;and&nbsp;dependencies<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;model&nbsp;is&nbsp;ready&nbsp;for&nbsp;analysis<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set_realized_exit_by_ent"><strong>set_realized_exit_by_ent</strong></a>(self, ent, rlzd_exit, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;a&nbsp;new&nbsp;realized&nbsp;exit&nbsp;for&nbsp;an&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+ent&nbsp;--&nbsp;the&nbsp;entity<br>
+rlzd_exit&nbsp;--&nbsp;the&nbsp;new&nbsp;exit&nbsp;for&nbsp;ent<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;rlzd_exit&nbsp;is&nbsp;valid&nbsp;(entity&nbsp;has&nbsp;an&nbsp;internal&nbsp;dependence<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;time&nbsp;is&nbsp;&gt;=0.0&nbsp;or&nbsp;==-1)&nbsp;and&nbsp;has&nbsp;been&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;new&nbsp;exit&nbsp;cannot&nbsp;be&nbsp;set</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set_realized_exits"><strong>set_realized_exits</strong></a>(self, rlzd_exits, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;realized&nbsp;exits.<br>
+&nbsp;<br>
+Arguments:<br>
+rlzd_exits&nbsp;--&nbsp;the&nbsp;new&nbsp;exits&nbsp;of&nbsp;the&nbsp;entities<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;new&nbsp;exits&nbsp;are&nbsp;valid&nbsp;and&nbsp;have&nbsp;been&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-set_realized_timelines"><strong>set_realized_timelines</strong></a>(self, rlzd_times, verbose<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;new&nbsp;realized&nbsp;time&nbsp;lines.<br>
+&nbsp;<br>
+Arguments:<br>
+rlzd_times&nbsp;--&nbsp;the&nbsp;new&nbsp;time&nbsp;lines&nbsp;of&nbsp;the&nbsp;entities<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;the&nbsp;new&nbsp;time&nbsp;lines&nbsp;are&nbsp;valid&nbsp;and&nbsp;have&nbsp;been&nbsp;copied&nbsp;in<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-valid_efforts"><strong>valid_efforts</strong></a>(self, efforts, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;efforts&nbsp;of&nbsp;entities&nbsp;are&nbsp;valid&nbsp;and&nbsp;match&nbsp;with&nbsp;dependencies.<br>
+&nbsp;<br>
+Arguments:<br>
+efforts&nbsp;--&nbsp;efforts&nbsp;of&nbsp;the&nbsp;entities<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;efforts&nbsp;of&nbsp;each&nbsp;entity&nbsp;are&nbsp;valid&nbsp;(i.e.&nbsp;non-negative)&nbsp;and&nbsp;match&nbsp;dependencies<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(efforts&nbsp;for&nbsp;resource&nbsp;entities&nbsp;cannot&nbsp;be&nbsp;included)<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;efforts&nbsp;are&nbsp;invalid</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-valid_internal_states"><strong>valid_internal_states</strong></a>(self, int_states, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;internal&nbsp;states&nbsp;of&nbsp;entities&nbsp;are&nbsp;valid&nbsp;and&nbsp;match&nbsp;with&nbsp;dependencies.<br>
+&nbsp;<br>
+Arguments:<br>
+int_states&nbsp;--&nbsp;current&nbsp;internal&nbsp;states&nbsp;of&nbsp;the&nbsp;entities<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;states&nbsp;are&nbsp;valid&nbsp;(i.e.&nbsp;either&nbsp;0&nbsp;or&nbsp;1)&nbsp;and&nbsp;match&nbsp;dependencies<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-valid_realized_timelines"><strong>valid_realized_timelines</strong></a>(self, timelines, verbose<font color="#909090">=False</font>)</dt><dd><tt>Check&nbsp;time&nbsp;lines&nbsp;of&nbsp;entities&nbsp;are&nbsp;valid.<br>
+&nbsp;<br>
+Arguments:<br>
+timelines&nbsp;--&nbsp;realized&nbsp;time&nbsp;lines&nbsp;of&nbsp;the&nbsp;entities<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;each&nbsp;entity&nbsp;of&nbsp;<a href="#GMORModel">GMORModel</a>&nbsp;has&nbsp;a&nbsp;valid&nbsp;(i.e.&nbsp;non-negative)&nbsp;time&nbsp;line<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;time&nbsp;lines&nbsp;are&nbsp;invalid</tt></dd></dl>
+
+<dl><dt><a name="GMORScenarioModel-valid_states"><strong>valid_states</strong></a>(self, arr)</dt><dd><tt>Check&nbsp;states&nbsp;of&nbsp;entities&nbsp;are&nbsp;valid.<br>
+&nbsp;<br>
+Arguments:<br>
+arr&nbsp;--&nbsp;the&nbsp;states<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;states&nbsp;are&nbsp;valid&nbsp;(i.e.&nbsp;either&nbsp;0&nbsp;or&nbsp;1&nbsp;and&nbsp;not&nbsp;empty)<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_bin_list"><strong>get_bin_list</strong></a>(num, n_var)</dt><dd><tt>Generate&nbsp;a&nbsp;binary&nbsp;value&nbsp;as&nbsp;a&nbsp;list&nbsp;of&nbsp;1s&nbsp;and&nbsp;0s&nbsp;from&nbsp;a&nbsp;decimal&nbsp;number.<br>
+&nbsp;<br>
+Arguments:<br>
+num&nbsp;--&nbsp;the&nbsp;decimal&nbsp;number<br>
+n_var&nbsp;--&nbsp;the&nbsp;number&nbsp;of&nbsp;bits&nbsp;in&nbsp;the&nbsp;binary&nbsp;value<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+state&nbsp;--&nbsp;the&nbsp;binary&nbsp;value&nbsp;(list)</tt></dd></dl>
+ <dl><dt><a name="-get_bin_lists"><strong>get_bin_lists</strong></a>(n_var)</dt><dd><tt>Generate&nbsp;binary&nbsp;values&nbsp;as&nbsp;lists&nbsp;of&nbsp;1s&nbsp;and&nbsp;0s&nbsp;for&nbsp;a&nbsp;given&nbsp;number&nbsp;of&nbsp;bits.<br>
+&nbsp;<br>
+Arguments:<br>
+n_var&nbsp;--&nbsp;the&nbsp;number&nbsp;of&nbsp;bits&nbsp;in&nbsp;each&nbsp;binary&nbsp;value<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+states&nbsp;--&nbsp;the&nbsp;list&nbsp;of&nbsp;binary&nbsp;values&nbsp;(list)</tt></dd></dl>
+ <dl><dt><a name="-get_dec_from_bin_arr"><strong>get_dec_from_bin_arr</strong></a>(arr)</dt><dd><tt>Calculate&nbsp;the&nbsp;decimal&nbsp;value&nbsp;equivalent&nbsp;to&nbsp;a&nbsp;given&nbsp;array&nbsp;of&nbsp;1s&nbsp;and&nbsp;0s.<br>
+&nbsp;<br>
+Arguments:<br>
+arr&nbsp;--&nbsp;a&nbsp;binary&nbsp;value&nbsp;represented&nbsp;by&nbsp;a&nbsp;list&nbsp;of&nbsp;1s&nbsp;and&nbsp;0s<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+res&nbsp;--&nbsp;the&nbsp;decimal&nbsp;number&nbsp;equal&nbsp;to&nbsp;the&nbsp;binary&nbsp;value&nbsp;(int)</tt></dd></dl>
+ <dl><dt><a name="-is_all_non_neg"><strong>is_all_non_neg</strong></a>(a_list)</dt><dd><tt>Determine&nbsp;if&nbsp;all&nbsp;the&nbsp;values&nbsp;in&nbsp;a&nbsp;list&nbsp;are&nbsp;non-negative.<br>
+&nbsp;<br>
+Arguments:<br>
+a_list&nbsp;--&nbsp;a&nbsp;list&nbsp;of&nbsp;decimal&nbsp;values<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;all&nbsp;values&nbsp;in&nbsp;a_list&nbsp;are&nbsp;all&nbsp;0&nbsp;or&nbsp;greater<br>
+False&nbsp;--&nbsp;otherwise</tt></dd></dl>
+ <dl><dt><a name="-valid_state"><strong>valid_state</strong></a>(state, st_len, verbose<font color="#909090">=False</font>)</dt><dd><tt>Determine&nbsp;if&nbsp;the&nbsp;state&nbsp;is&nbsp;properly&nbsp;formed.<br>
+&nbsp;<br>
+Arguments:<br>
+state&nbsp;--&nbsp;a&nbsp;list&nbsp;of&nbsp;zeros&nbsp;and&nbsp;or&nbsp;ones&nbsp;representing&nbsp;entity&nbsp;states<br>
+st_len&nbsp;--&nbsp;the&nbsp;length&nbsp;that&nbsp;state&nbsp;should&nbsp;be<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+verbose&nbsp;--&nbsp;activate&nbsp;throwing&nbsp;errors&nbsp;with&nbsp;descriptive&nbsp;messages&nbsp;(default&nbsp;False)<br>
+&nbsp;<br>
+Return&nbsp;values:<br>
+True&nbsp;--&nbsp;if&nbsp;state&nbsp;is&nbsp;right&nbsp;length&nbsp;with&nbsp;values&nbsp;equal&nbsp;to&nbsp;0&nbsp;or&nbsp;1<br>
+False&nbsp;--&nbsp;otherwise<br>
+&nbsp;<br>
+Exceptions:<br>
+ValueError&nbsp;--&nbsp;raised&nbsp;when&nbsp;verbose&nbsp;mode&nbsp;on&nbsp;and&nbsp;states&nbsp;are&nbsp;invalid</tt></dd></dl>
+</td></tr></table>
+</body></html>
