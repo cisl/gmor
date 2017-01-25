@@ -20,4 +20,5 @@ To run it, use `GMORRunner`
 More to come...
 
 # How to cite
+Aspects of this software are described in:
 Bristow and Hay, 2016. Graph Model for Probabilistic Resilience and Recovery Planning of Multi-Infrastructure Systems. ASCE Journal of Infrastructure Systems, http://dx.doi.org/10.1061/(ASCE)IS.1943-555X.0000338#sthash.6JtAP3OV.dpuf
